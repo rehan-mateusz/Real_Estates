@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<ol>
+  <h1>Messages:</h1>
+  {% for msg in usermessages_list %}
+
+    <p><a href="{% url 'accounts:msg_details' pk=msg.id %}"> {{msg.title}} by {{msg.msg_sender}} </a></p>
+
+  {% endfor %}
+</ol>
+
+
+{% endblock %}

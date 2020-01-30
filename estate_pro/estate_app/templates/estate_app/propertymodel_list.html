@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+
+  <div class="col-md-10 blogShort">
+    <form method="GET">
+      <h3>Filter:</h3>
+      <br>
+      {{filter.form.as_table}}
+      <br>
+      <br>
+      <input class="btn btn-default" type="submit" value="Filter!">
+      <a class="btn btn-default" href="{%url 'estate_app:property_list_view' %}">Reset Filters!</a>
+    </form>
+    <br>
+  </div>
+
+
+  <div class="col-md-10 blogShort">
+    <h1>List of offers:</h1>
+    {% for offer in filter.qs %}
+      <h2><a href="{% url 'estate_app:property_detail_view' offer.id %}"> {{offer.title}} </a> </h2>
+    {% endfor %}
+  </div>
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load msg_tags %}
+
+{% block content %}
+
+<ol>
+  <h1>Chats with:</h1>
+  {% for msg in usermessages_list %}
+
+    <p><a href="{% url 'accounts:chat_details' pk=msg.msg_sender.id %}">
+    {{msg.title}} by {{msg.msg_sender}} ({% unread_from_user msg.msg_sender.id msg.msg_receiver.id %}) </a></p>
+
+  {% endfor %}
+</ol>
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+
+{% block content %}
+
+<form method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" name="" value="Send Message">
+
+</form>
+
+{% for msg in usermessages_list %}
+
+  <p><a href="{% url 'accounts:chat_details' pk=msg.msg_sender.id %}"> {{msg.title}} by {{msg.msg_sender}} </a></p>
+
+{% endfor %}
+
+
+
+{% endblock %}

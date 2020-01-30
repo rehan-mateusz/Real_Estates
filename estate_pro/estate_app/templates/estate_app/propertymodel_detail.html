@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+  <p>Author: <a href="{% url 'estate_app:user_offers_view' propertymodel.author %}">{{propertymodel.author}}</a> </p>
+  <p>Title: {{propertymodel.title}} </p>
+  <p>Property description: {{propertymodel.text}} </p>
+  <p>Price: {{propertymodel.price}} </p>
+  <p>City: {{propertymodel.city}} </p>
+  <p>Estate type: {{propertymodel.estate_type}} </p>
+  <div class="row gallery">
+    {% for image in propertymodel.images.all %}
+      <p>AAAA</p>
+
+      <img src="{{image.image.url}}" alt="Image Not Found" class="img-thumbnail">
+    {% endfor %}
+  </div>
+  {% if propertymodel.author == user %}
+    <p> <a href="{% url 'estate_app:delete_property' pk=propertymodel.id %}">DELETE</a>
+     <a href="{% url 'estate_app:edit_property' pk=propertymodel.id %}">EDIT</a></p>
+  {% endif %}
+
+<form method="post">
+  {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" name="" value="Send Message">
+
+</form>
+
+
+
+{% endblock %}

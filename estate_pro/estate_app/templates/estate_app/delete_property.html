@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+  <h1> Do you wanna delete {{propertymodel.title}}? </h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <input type="submit" name="" value="Delete">
+
+  </form>
+
+{% endblock %}

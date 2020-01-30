@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+    <h1> {{user.username}} details</h1>
+    <p>Name:
+    {% if userdetails.name != None %}
+      {{userdetails.name}}
+    {% endif %}
+    </p>
+    <p>Phone number:
+    {% if userdetails.phone_num != None %}
+      {{userdetails.phone_num}}
+    {% endif %}
+    </p>
+
+    <p>
+    <a href="{% url 'accounts:details_update' pk=user.id %}">Edit!</a>
+    </p>
+    Messages:
+    <br>
+
+    {% for msg in messages %}
+      <p>{{msg}} send by {{msg.msg_sender}}</p>
+    {% endfor %}
+
+  </div>
+</div>
+{% endblock %}

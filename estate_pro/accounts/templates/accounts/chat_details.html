@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<ol>
+  <h1>Chat with:</h1>
+  {% for msg in usermessages_list %}
+
+  {{msg.title}} by {{msg.msg_sender}}
+  
+  {% endfor %}
+</ol>
+
+
+{% endblock %}
