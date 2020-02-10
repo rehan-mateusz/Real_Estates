@@ -30,6 +30,8 @@ $ pip install Python==3.5.3
 $ pip install Django==2.2.4
 $ pip install django-bootstrap3==11.1.0
 $ pip install django-filter==2.2.0
+$ pip install django-model-utils
+$ pip install Pillow
 ```
 
 # How to use
