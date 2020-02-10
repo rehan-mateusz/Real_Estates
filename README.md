@@ -1,11 +1,29 @@
 ![HomePageSS1](/ss1.PNG)
 
 # Real_Estates
+Real estates is a web application for listing real estate and communication between registered users.
 
-Real estates is a web application for listing real estate and communication between users.
+Guests can:
+- See the list of all offers and filter this list 
+- See detailed view of particular offer
+- See all offers of particular user
+- Register an account
+- Log in
+
+Registered users can:
+- Create their own offers
+- Edit their own offers
+- Delete their own offers
+- Send message to an author of a particular offer
+- Read all received messages 
+- Reply to received messages
+- Change profile info
+- Log out
+
+Admin can:
+- use admin panel (django admin)
 
 # Requirements
-
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install packages.
 ```
 $ pip install Python==3.5.3
@@ -14,15 +32,8 @@ $ pip install django-bootstrap3==11.1.0
 $ pip install django-filter==2.2.0
 ```
 
-Web app for CRUD real estates offers and user-to-user messaging system build with Django 2.2
+# How to use
+After downloading the repository and installing everything required cd to /estate_pro and type python manage.py runserver into console
 
-This web app allows guests to view list of all created offers or filtered list of offers as well as detailed views of single offers.
-Guest may also register an account (with default user model).
 
-Registered users can create their own offers with limited number of images attached. Users can also update and delete their own offers. 
-While in a particular offers details page, one can send a message to its owner. 
-User sees a number of messages and unread messages next to "Inbox" url. While in inbox user sees a list of messages send by other users
-(but only last message of every of the users). By clicking on a message from a particular user, one can see a chat view with that person
-and is able to reply.
-User can also edit additional information (like contact data) so it appears on every offer that user creates.
 
