@@ -70,13 +70,6 @@ class UserDetailsView(DetailView):
     model = models.UserDetails
     template_name = 'accounts/user_details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['userdetails'] = models.UserDetails.objects.get(user = User.objects.get(id = self.kwargs['pk']))
-        context['messages'] = estate_models.UserMessages.objects.filter(
-                msg_receiver = User.objects.get(id = self.kwargs['pk']))
-        return context
-
 class DetailsUpdate(AuthorRequiredMixin, UpdateView):
     fields = ('phone_num', 'name')
     model = models.UserDetails

@@ -163,7 +163,7 @@ class MyOfferList(LoginRequiredMixin, ListView):
     template_name = 'estate_app/my_offers_list.html'
 
     def get_queryset(self):
-        return models.PropertyModel.objects.filter(author=self.request.user)
+        return models.PropertyModel.objects.filter(author=self.request.user).order_by('-id')
 
 class UserOffersList(ListView):
 

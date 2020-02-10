@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
-{% load msg_tags %}
+{% load my_tags %}
 <html lang="en" dir="ltr">
   <head>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -12,10 +12,11 @@
     <title></title>
   </head>
   <body>
+  <img class="bg-picture" src="{% static 'estate_pro/city.png' %}" alt="">
   <div class="container">
 	 <div id="blog" class="row">
 
-                  <div class="col-sm-2 paddingTop20">
+          <div class="col-sm-2 paddingTop20">
             <nav class="nav-sidebar">
                 <ul class="nav">
                     <li class="active"><a href="{%url 'estate_app:property_list_view' %}"><span class="glyphicon glyphicon-star"></span> Estates</a></li>
@@ -55,6 +56,6 @@
 
                <div class="col-md-12 gap10"></div>
              </div>
-</div>
+          </div>
   </body>
 </html>

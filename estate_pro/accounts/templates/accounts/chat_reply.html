@@ -3,17 +3,44 @@
 
 
 {% block content %}
+<h1>Reply:</h1>
+<div class="col-sm-10 pull-right blogShort">
+  <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input class="btn btn-default" type="submit" name="" value="Send Message">
+  </form>
+</div>
 
-<form method="post">
-  {% csrf_token %}
-  {{form.as_p}}
-  <input type="submit" name="" value="Send Message">
-
-</form>
 
 {% for msg in usermessages_list %}
-
-  <p><a href="{% url 'accounts:chat_details' pk=msg.msg_sender.id %}"> {{msg.title}} by {{msg.msg_sender}} </a></p>
+  {% if msg.msg_sender == user %}
+  <div class="col-sm-10 pull-right blogShort">
+    <div class="col-sm-9 pull-right">
+      <div>
+        <h3 class="pull-right">Title: {{msg.title}}</h3>
+      </div>
+      <div class="msg-by-user">
+        <br> <br> <br>
+          {{msg.message}} 
+          <br> by you
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="col-sm-10 pull-right blogShort">
+    <div class="col-sm-9 pull-left">
+      <div>
+        <h3 class="pull-left">Title: {{msg.title}}</h3>
+      </div>
+      <div class="msg-by-other">
+        <br> <br> <br>
+        {{msg.message}} <br>
+        by {{msg.msg_sender}}
+      </div>
+    </div>
+  </div>
+  {% endif %}
 
 {% endfor %}
 

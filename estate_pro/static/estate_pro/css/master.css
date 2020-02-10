@@ -1,5 +1,14 @@
+.bg-picture {
+  width:100%;
+}
 
+.msg-by-user {
+  text-align: right;
+}
 
+.msg-by-other {
+  text-align: left;
+}
 .blogShort{ border-bottom:1px solid #ddd;}
 .add{background: #333; padding: 10%; height: 300px;}
 
