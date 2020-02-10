@@ -1,4 +1,18 @@
+[HomePageSS1](/ss1.png)
+
 # Real_Estates
+
+Real estates is a web application for listing real estate and communication between users.
+
+# Requirements
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install packages.
+```
+$ pip install Python==3.5.3
+$ pip install Django==2.2.4
+$ pip install django-bootstrap3==11.1.0
+$ pip install django-filter==2.2.0
+```
 
 Web app for CRUD real estates offers and user-to-user messaging system build with Django 2.2
 
