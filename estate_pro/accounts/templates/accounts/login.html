@@ -2,8 +2,8 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<div class="jumbotron">
-  <div class="container">
+
+  <div class="col-sm-10 container">
     <h1> Log In</h1>
     <form method="post">
       {% csrf_token %}
@@ -12,5 +12,5 @@
 
     </form>
   </div>
-</div>
+
 {% endblock %}
