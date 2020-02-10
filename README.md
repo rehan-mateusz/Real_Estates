@@ -1,4 +1,4 @@
-[HomePageSS1](/ss1.PNG)
+![HomePageSS1](/ss1.PNG)
 
 # Real_Estates
 
