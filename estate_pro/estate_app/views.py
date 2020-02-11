@@ -80,8 +80,6 @@ class PropertyCreationView(LoginRequiredMixin, CreateView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         formset = forms.ImagesCreateFormSet(self.request.POST, self.request.FILES or None)
-        # form_valid = form.is_valid()
-        # formset_valid = formset.is_valid()
         if (form.is_valid() and formset.is_valid()):
             self.object = form.save(commit=False)
             self.object.author = self.request.user
@@ -119,7 +117,6 @@ class PropertyEditView(AuthorRequiredMixin, LoginRequiredMixin, UpdateView):
             for img in formset:
 
                 try:
-                    # if img.instance not in models.ImagesModel.objects.all():
                     if not img.instance.pk:
                         photo = models.ImagesModel(property = self.object, image = img.cleaned_data['image'])
                         photo.save()

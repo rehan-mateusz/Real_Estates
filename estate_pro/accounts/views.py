@@ -53,10 +53,6 @@ class SignUp(CreateView):
         if (form.is_valid() and formset.is_valid()):
             self.object = form.save()
             for f in formset:
-                # details = models.UserDetails(
-                #     user = self.object,
-                #     phone_num = f.cleaned_data['phone_num'],
-                #     name = f.cleaned_data['name'])
                 details = f.save(commit=False)
                 details.user = self.object
                 details.save()
@@ -121,46 +117,3 @@ class InboxChatView(LoginRequiredMixin, ListView):
             msg_receiver = self.request.user.id, msg_sender = OuterRef('msg_sender')).order_by('-id')
         final = estate_models.UserMessages.objects.filter(pk=Subquery(subq.values('pk')[:1]))
         return final.order_by('-id')
-
-# class UserChatView(LoginRequiredMixin, ListView):
-#
-#     model = estate_models.UserMessages
-#     template_name = 'accounts/chat_details.html'
-#
-#     def get_queryset(self):
-#         messages = estate_models.UserMessages.objects.filter(
-#             msg_receiver = self.request.user, msg_sender = self.kwargs['pk'])
-#         for msg in messages:
-#             if msg.is_read == False:
-#                 estate_models.UserMessages.objects.get(
-#                 id = msg.id).read_msg()
-#
-#         qs = estate_models.UserMessages.objects.filter((
-#             (Q(msg_receiver = self.request.user) & Q(msg_sender = self.kwargs['pk']))
-#             | (Q(msg_receiver = self.kwargs['pk']) & Q(msg_sender = self.request.user)))).order_by('-pk')
-#         return qs
-
-# class UserMessagesView(LoginRequiredMixin, ListView):
-#
-#     model = estate_models.UserMessages
-#     template_name = 'accounts/inbox.html'
-#
-#     def get_queryset(self):
-#         return estate_models.UserMessages.objects.filter(msg_receiver = self.request.user)
-
-# class UserMessagesView(LoginRequiredMixin, ListView):
-#
-#     model = estate_models.UserMessages
-#     template_name = 'accounts/inbox.html'
-#
-#     def get_queryset(self):
-#         return estate_models.UserMessages.objects.filter(msg_receiver = self.request.user)
-
-# class MessageDetailsView(LoginRequiredMixin, DetailView):
-#
-#     model = estate_models.UserMessages
-#     template_name = 'accounts/messages.html'
-#
-#     def get_queryset(self):
-#         estate_models.UserMessages.objects.fi(id = self.kwargs['pk']).read_msg()
-#         return estate_models.UserMessages.objects.filter(id = self.kwargs['pk'])

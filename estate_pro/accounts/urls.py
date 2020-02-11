@@ -1,6 +1,5 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-import django_messages
 
 from . import views
 
@@ -21,7 +20,3 @@ urlpatterns = [
     path('chat/', views.InboxChatView.as_view(), name='chat'),
     path('chat/<int:pk>/reply/', views.ChatReplyView.as_view(), name='chat_details'),
 ]
-
-    # path('inbox/', views.UserMessagesView.as_view(), name='inbox'),
-    # path('inbox/<int:pk>/', views.MessageDetailsView.as_view(), name='msg_details'),
-    # path('chat/<int:pk>/', views.UserChatView.as_view(), name='chat_details'),
