@@ -36,3 +36,9 @@ def get_first_photo(offer_id):
 @register.simple_tag
 def cut_text(text):
     return text[:120]
+
+@register.simple_tag
+def url_replace(request, field, value):
+    d = request.GET.copy()
+    d[field] = value
+    return d.urlencode()

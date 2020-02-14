@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="col-sm-10 blogShort">
+<div class="col-sm-8 blogShort">
 
   <h1>{{propertymodel.title}} </h1>
   <p>Author: <a href="{% url 'estate_app:user_offers_view' propertymodel.author %}">{{propertymodel.author}}</a> </p>
@@ -14,7 +14,7 @@
 
   <div class="row gallery">
     {% for image in propertymodel.images.all %}
-      <a href="{{image.image.url}}"><img src="{{image.image.url}}" alt="Image Not Found" class="img-thumbnail col-sm-4"></a>  
+      <a href="{{image.image.url}}"><img src="{{image.image.url}}" alt="Image Not Found" class="img-thumbnail col-sm-4"></a>
     {% endfor %}
   </div>
   <br>
@@ -23,7 +23,12 @@
      <a class="btn btn-default" href="{% url 'estate_app:edit_property' pk=propertymodel.id %}">EDIT</a></p>
   {% endif %}
 </div>
-
+<div class="col-sm-2 pull-right">
+  <br>
+  <p>Author: <a href="{% url 'estate_app:user_offers_view' propertymodel.author %}">{{propertymodel.author}}</a> </p>
+  <p>Name: {{propertymodel.author.name}}</p>
+  <p>Phone: {{propertymodel.author.phone_num}}</p>
+</div>
 <div class="col-sm-10 blogShort pull-right">
   <h1>Send message to the author:</h1>
   <form method="post">
@@ -33,4 +38,5 @@
 
   </form>
 </div>
+
 {% endblock %}

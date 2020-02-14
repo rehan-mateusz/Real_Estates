@@ -4,6 +4,7 @@ from django.views.generic import  DetailView, ListView, CreateView, UpdateView, 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
+from django_filters.views import BaseFilterView
 
 
 from . import models
@@ -42,15 +43,13 @@ class MessageSendView(LoginRequiredMixin, CreateView):
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-class PropertyListView(ListView):
+class PropertyListView(BaseFilterView, ListView):
 
     model = models.PropertyModel
     context_object_name = 'estates'
+    paginate_by = 1
+    filterset_class = filters.PropertyFilter
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = filters.PropertyFilter(self.request.GET, queryset=self.get_queryset())
-        return context
 
 class PropertyCreationView(LoginRequiredMixin, CreateView):
 
