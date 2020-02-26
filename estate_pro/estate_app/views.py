@@ -4,6 +4,7 @@ from django.views.generic import  DetailView, ListView, CreateView, UpdateView, 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 from django_filters.views import BaseFilterView
 
 
@@ -19,7 +20,6 @@ class AuthorRequiredMixin:
         if self.object.author != self.request.user:
             return redirect('estate_app:my_offers_list')
         return super(AuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
-
 
 class MessageSendView(LoginRequiredMixin, CreateView):
 
@@ -46,10 +46,8 @@ class MessageSendView(LoginRequiredMixin, CreateView):
 class PropertyListView(BaseFilterView, ListView):
 
     model = models.PropertyModel
-    context_object_name = 'estates'
     paginate_by = 1
     filterset_class = filters.PropertyFilter
-
 
 class PropertyCreationView(LoginRequiredMixin, CreateView):
 
@@ -154,27 +152,25 @@ class PropertyDeleteView(AuthorRequiredMixin, LoginRequiredMixin, DeleteView):
     def get_success_url(self):
         return reverse_lazy('estate_app:my_offers_list')
 
-class MyOfferList(LoginRequiredMixin, ListView):
+class MyOfferList(LoginRequiredMixin, BaseFilterView, ListView):
+
     model = models.PropertyModel
     template_name = 'estate_app/my_offers_list.html'
+    paginate_by = 1
+    filterset_class = filters.PropertyFilter
 
     def get_queryset(self):
         return models.PropertyModel.objects.filter(author=self.request.user).order_by('-id')
 
-class UserOffersList(ListView):
+class UserOffersList(BaseFilterView, ListView):
 
     model = models.PropertyModel
     template_name = 'estate_app/user_offers_list.html'
+    paginate_by = 1
+    filterset_class = filters.PropertyFilter
 
     def get_queryset(self):
-        try:
-            self.propertymodel_author = User.objects.prefetch_related('estates').get(
-                username__iexact=self.kwargs['username'])
-
-        except User.DoesNotExist:
-            raise Http404
-        else:
-            return self.propertymodel_author.estates.all()
+        return models.PropertyModel.objects.filter(author = User.objects.get(username = self.kwargs['username'])).order_by('-id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

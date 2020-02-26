@@ -16,7 +16,3 @@ urlpatterns = [
     path('offers/<int:pk>/', views.MessageSendView.as_view(), name='property_detail_view'),
 
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-# <li> <a href="{% url 'estate_app:user_offers_view' user.username %}">Users Offers</a> </li>

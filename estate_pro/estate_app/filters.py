@@ -10,7 +10,6 @@ class PropertyFilter(django_filters.FilterSet):
 
     class Meta:
         model = models.PropertyModel
-
         fields = {
             'price': ['lt', 'gt'],
             'title': ['icontains'],

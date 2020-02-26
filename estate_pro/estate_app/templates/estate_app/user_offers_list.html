@@ -4,24 +4,47 @@
 
 {% block content %}
 
-<h1>{{current_author}}'s offers:</h1>
-{% for offer in propertymodel_list %}
+<h1></h1>
+<div class="col-sm-10 blogShort">
+  <form method="GET">
+    <h3>Filter {{current_author}}'s offers:</h3>
+    <br>
+    {{filter.form.as_table}}
+    <br>
+    <br>
+    <input class="btn btn-default" type="submit" value="Filter!">
+    <a class="btn btn-default" href="{%url 'estate_app:property_list_view' %}">Reset Filters!</a>
+  </form>
+  <br>
+</div>
 
-  <div class="col-sm-10 pull-right blogShort">
-      <h1>{{offer.title}}</h1>
-      <div class="col-sm-4 pull-left">
-        <img src="{% get_first_photo offer.id %}" alt="no image" class="pull-left img-responsive thumb margin10 img-thumbnail profile-img">
-      </div>
+   {% for offer in object_list %}
 
-      <article><p>
-          Description: {% cut_text offer.text %} <br>
-          Price: {{offer.price}} <br>
-          City: {{offer.city}}
-        </p></article>
+    <div class="col-sm-10 pull-right blogShort">
+        <h1>{{offer.title}}</h1>
+        <div class="col-sm-4 pull-left">
+          <img src="{% get_first_photo offer.id %}" alt="post img" class="pull-left img-responsive margin10 img-thumbnail profile-img">
+        </div>
 
-      <a class="btn btn-blog pull-right marginBottom10" href="{% url 'estate_app:property_detail_view' offer.id %}">READ MORE</a>
+        <article><p>
+            Description: {% cut_text offer.text %} <br>
+            Price: {{offer.price}} <br>
+            City: {{offer.city}}
+          </p></article>
+
+        <a class="btn btn-blog pull-right marginBottom10" href="{% url 'estate_app:property_detail_view' offer.id %}">READ MORE</a>
+    </div>
+  {% endfor %}
+  <div class="paginator col-sm-10">
+    {% if is_paginated %}
+      {% if page_obj.has_previous %}
+        <a href="?{% url_replace request 'page' page_obj.previous_page_number %}"> Previous </a>
+      {% endif %}
+      {{page_obj}}
+      {% if page_obj.has_next %}
+        <a href="?{% url_replace request 'page' page_obj.next_page_number %}"> Next </a>
+      {% endif %}
+    {% endif %}
   </div>
-
-{% endfor %}
 
 {% endblock %}
