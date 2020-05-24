@@ -4,7 +4,7 @@
 {% block content %}
 
   <div class="col-sm-10 pull-right blogShort">
-    <h1> {{user.username}} details</h1>
+    <h1> {{userdetails.user}} details</h1>
     <p>Name:
     {% if userdetails.name != None %}
       {{userdetails.name}}
@@ -16,10 +16,11 @@
     {% endif %}
     </p>
 
-    <p>
-    <a href="{% url 'accounts:details_update' pk=user.id %}">Edit!</a>
-    </p>
-
+    {% if userdetails.user.id == user.id %}
+      <p>
+      <a href="{% url 'accounts:details_update' pk=user.id %}">Edit!</a>
+      </p>
+    {% endif %}
 
   </div>
 

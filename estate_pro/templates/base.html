@@ -21,7 +21,7 @@
                 <ul class="nav">
                     <li class="active"><a href="{%url 'estate_app:property_list_view' %}"><span class="glyphicon glyphicon-star"></span> Estates</a></li>
                     {% if user.is_authenticated %}
-                      <li><a href="{% url 'estate_app:property_create_form' %}">Create offer</a></li>
+                      <li><a href="{% url 'estate_app:property_create' %}">Create offer</a></li>
                       <li><a href="{% url 'estate_app:my_offers_list' %}">My Offers</a></li>
                       <li><a href="{% url 'accounts:chat' %}">
                         Inbox: {% total_messages user.id %} <b> ({% unread_messages user.id %})</b> </a> </li>

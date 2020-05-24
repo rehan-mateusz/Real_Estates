@@ -28,10 +28,6 @@ class PropertyModel(models.Model):
     def __str__(self):
       return self.title
 
-# def get_filename(instance, filename):
-#     title = instance.property.title
-#     slug = slug(title)
-#     return "property_images/%s-%s" % (slug, filename)
 
 class ImagesModel(models.Model):
     property = models.ForeignKey(PropertyModel, related_name = 'images', on_delete=models.CASCADE)

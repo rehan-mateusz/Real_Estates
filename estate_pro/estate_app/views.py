@@ -21,7 +21,7 @@ class AuthorRequiredMixin:
             return redirect('estate_app:my_offers_list')
         return super(AuthorRequiredMixin, self).dispatch(request, *args, **kwargs)
 
-class MessageSendView(LoginRequiredMixin, CreateView):
+class PropertyDetailView(CreateView):
 
     form_class = forms.MessagesForm
     template_name = 'estate_app/propertymodel_detail.html'
@@ -49,17 +49,23 @@ class PropertyListView(BaseFilterView, ListView):
     paginate_by = 1
     filterset_class = filters.PropertyFilter
 
-class PropertyCreationView(LoginRequiredMixin, CreateView):
+class PropertyCreateView(LoginRequiredMixin, CreateView):
 
     fields = ('title', 'text', 'price', 'city', 'estate_type')
     model = models.PropertyModel
     template_name = 'estate_app/property_create_form.html'
 
     def form_valid(self, form, formset):
+        print("DUPADUPA")
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form, formset):
-        return render(self.get_context_data(form=form, formset=formset))
+        print( formset)
+        if form.is_valid() == False:
+            print("FORM INVALID")
+        if formset.is_valid() == False:
+            print("FORMSET INVALID")
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get_success_url(self):
         return reverse_lazy('estate_app:my_offers_list')
@@ -91,7 +97,7 @@ class PropertyCreationView(LoginRequiredMixin, CreateView):
         else:
             return self.form_invalid(form, formset)
 
-class PropertyEditView(AuthorRequiredMixin, LoginRequiredMixin, UpdateView):
+class PropertyEditView(AuthorRequiredMixin, LoginRequiredMixin,  UpdateView):
     fields = ('title', 'text', 'price', 'city', 'estate_type')
     model = models.PropertyModel
     template_name = 'estate_app/propertymodel_edit.html'
@@ -128,7 +134,6 @@ class PropertyEditView(AuthorRequiredMixin, LoginRequiredMixin, UpdateView):
                         photo.save()
 
                 except Exception as e:
-                    print(e)
                     pass
 
             return self.form_valid(form, formset)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -38,9 +38,7 @@ class SignUp(CreateView):
         self.object = None
         form_class = forms.UserSignUpForm
         form = self.get_form(form_class)
-
         formset = forms.UserDetailsFormSet(queryset=models.UserDetails.objects.none())
-
         template_name = 'accounts/signup.html'
         return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
@@ -66,13 +64,13 @@ class UserDetailsView(DetailView):
     model = models.UserDetails
     template_name = 'accounts/user_details.html'
 
-class DetailsUpdate(AuthorRequiredMixin, UpdateView):
+class DetailsUpdate(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
     fields = ('phone_num', 'name')
     model = models.UserDetails
     template_name = 'accounts/details_edit.html'
 
     def get_success_url(self):
-     return reverse_lazy('estate_app:my_offers_list')
+     return reverse_lazy('accounts:details_view', kwargs = {'pk' : self.request.user.id})
 
 class ChatReplyView(LoginRequiredMixin, CreateView):
 
@@ -104,8 +102,8 @@ class ChatReplyView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        propertyid = self.kwargs['pk']
-        return reverse_lazy('accounts:chat_details', kwargs={'pk': propertyid})
+        chat_with = self.kwargs['pk']
+        return reverse_lazy('accounts:chat_details', kwargs={'pk': chat_with})
 
 class InboxChatView(LoginRequiredMixin, ListView):
 

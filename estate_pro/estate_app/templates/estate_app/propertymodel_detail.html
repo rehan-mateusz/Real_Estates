@@ -29,14 +29,16 @@
   <p>Name: {{propertymodel.author.name}}</p>
   <p>Phone: {{propertymodel.author.phone_num}}</p>
 </div>
-<div class="col-sm-10 blogShort pull-right">
-  <h1>Send message to the author:</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" name="" value="Send Message">
+{% if user.is_authenticated %}
+  <div class="col-sm-10 blogShort pull-right">
+    <h1>Send message to the author:</h1>
+    <form method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+      <input type="submit" name="" value="Send Message">
 
-  </form>
-</div>
+    </form>
+  </div>
+{% endif %}
 
 {% endblock %}
