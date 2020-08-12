@@ -56,7 +56,6 @@ class PropertyCreateView(LoginRequiredMixin, CreateView):
     template_name = 'estate_app/property_create_form.html'
 
     def form_valid(self, form, formset):
-        print("DUPADUPA")
         return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form, formset):

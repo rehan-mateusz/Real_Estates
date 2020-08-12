@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  webapp:
+    build:
+      context: .
+    container_name: asda
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/estate_project
+    command: >
+      sh -c "python estate_pro/manage.py runserver 0.0.0.0:8000"
