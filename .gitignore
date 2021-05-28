@@ -1,3 +1,5 @@
 estate_pro/media/*
-
 envDjango
+__pycache__
+*.pyc
+
