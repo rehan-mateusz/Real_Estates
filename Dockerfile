@@ -8,7 +8,7 @@ RUN pip install -r /requirements.txt
 
 RUN mkdir /estate_project
 WORKDIR /estate_project
-COPY . /estate_project/
+COPY /estate_pro /estate_project/
 
 RUN adduser -D user
 USER user
