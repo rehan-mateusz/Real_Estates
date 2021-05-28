@@ -32,7 +32,7 @@ class SignUp(CreateView):
         return reverse_lazy('accounts:login')
 
     def form_invalid(self, form, formset):
-        return render(self.get_context_data(form=form, formset=formset, template_name = 'accounts/login.html'))
+        return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
     def get(self, *args, **kwargs):
         self.object = None
