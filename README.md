@@ -3,14 +3,14 @@
 # Real_Estates
 Real estates is a web application for listing real estate and communication between registered users. Deployed at [http://kulas971.pythonanywhere.com](http://kulas971.pythonanywhere.com/)
 
-Guests can:
+**Guests can:**
 - See the list of all offers and filter this list 
 - See detailed view of particular offer
 - See all offers of particular user
 - Register an account
 - Log in
 
-Registered users can:
+**Registered users can:**
 - Create their own offers
 - Edit their own offers
 - Delete their own offers
@@ -20,22 +20,43 @@ Registered users can:
 - Change profile info
 - Log out
 
-Admin can:
+**Admin can:**
 - use admin panel (django admin)
 
-# Requirements
+# How to use
+After cloning the repository
+
+**Start with docker:**
+
+cd to /Real_estates and use docker-compose
+```
+docker-compose up
+```
+**Start with Python:**
+
+Preferably create a virtual environment.
+
+cd to /Real_estates/estate_pro
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install packages.
 ```
-$ pip install Python==3.5.3
-$ pip install Django==2.2.4
-$ pip install django-bootstrap3==11.1.0
-$ pip install django-filter==2.2.0
-$ pip install django-model-utils
-$ pip install Pillow
+pip install -r requirements.txt
+```
+With requirements installed you can run the app:
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
 ```
 
-# How to use
-After downloading the repository and installing everything required cd to /estate_pro and type python manage.py runserver into console
 
+# Test accounts
+If you don't want to register an account (you can use fake email, no confirmation needed), you can use one of two test accounts:
+- testuser1 / Testpassword1
+- testuser2 / Testpassword2
 
+ # Run tests
+ cd into /Real_Estates/estate_pro and type 
+ ```
+pytest
+```
 
